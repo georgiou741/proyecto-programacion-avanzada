@@ -1,0 +1,234 @@
+/* === RESET Y BASE (Uso del Box Model Moderno) === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* El tamaño incluye padding y bordes sin sumarse por fuera */
+}
+
+/* === VARIABLES GLOBAL DE ESTILO === */
+:root {
+    --color-primario: #1a3c5e;       /* Azul oscuro universitario */
+    --color-secundario: #e8f4f8;     /* Azul claro para fondos alternos o hovers */
+    --color-texto: #333333;          /* Gris oscuro legible */
+    --color-acento: #2980b9;         /* Azul brillante para interacción/botones */
+    --fuente-principal: 'Roboto', sans-serif;
+    --fuente-titulos: 'Playfair Display', serif;
+    --radio-borde: 8px;
+    --sombra: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* === TIPOGRAFÍA Y CUERPO BASE === */
+body {
+    font-family: var(--fuente-principal);
+    color: var(--color-texto);
+    line-height: 1.7;
+    background-color: #f5f5f5; /* Fondo general gris suave */
+}
+
+/* Selector general por etiqueta */
+p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* === HEADER (Implementando Flexbox) === */
+header {
+    background-color: var(--color-primario);
+    color: white;
+    padding: 20px 40px;
+    display: flex; /* Activa Flexbox para alinear h1 y nav horizontalmente */
+    justify-content: space-between; /* Uno al extremo izquierdo y otro al derecho */
+    align-items: center; /* Centrados verticalmente */
+}
+
+header h1 {
+    font-family: var(--fuente-titulos);
+    font-size: 24px;
+}
+
+/* === NAVEGACIÓN === */
+nav {
+    display: flex; /* Los enlaces se alinean en fila */
+    gap: 20px; /* Separación uniforme entre enlaces */
+}
+
+/* Selector descendiente */
+nav a {
+    text-decoration: none; /* Quita el subrayado feo */
+    color: #ffffff; /* Texto blanco sobre el azul primario */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* Pseudo-clase hover */
+nav a:hover {
+    color: var(--color-secundario); /* Cambia de color cuando pasa el ratón */
+    text-decoration: underline;
+}
+
+/* === SECCIONES PRINCIPALES === */
+main {
+    max-width: 960px; /* Ancho máximo contenedor en desktop */
+    margin: 40px auto; /* Centra el bloque main horizontalmente */
+    padding: 0 20px; /* Margen interno para que no toque los bordes en móviles */
+}
+
+/* Selector de hijo directo: Aplica espaciado entre secciones de main */
+main > section {
+    margin-bottom: 40px;
+}
+
+section {
+    background-color: white;
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra);
+    padding: 30px;
+}
+
+section h2 {
+    font-family: var(--fuente-titulos);
+    color: var(--color-primario);
+    border-bottom: 2px solid var(--color-primario);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Layout específico para el perfil (Imagen al lado de textos) */
+.perfil-contenido {
+    display: flex; /* Coloca imagen y texto en columnas horizontales */
+    gap: 30px; 
+    align-items: center;
+}
+
+.perfil-contenido img {
+    border-radius: 50%; /* Transforma tu foto cuadrada en redonda si gustas */
+    border: 3px solid var(--color-primario);
+}
+
+/* Clases de utilidad específicas */
+.resaltado {
+    background-color: #fff3cd; /* Fondo amarillo suave */
+    padding: 10px;
+    border-left: 4px solid #ffc107;
+    margin-top: 15px;
+}
+
+/* === TABLA DE CALIFICACIONES === */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Evita dobles bordes */
+    margin-top: 15px;
+}
+
+th {
+    background-color: var(--color-primario);
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/* nth-child para filas alternas */
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Efecto hover en las filas */
+tbody tr:hover {
+    background-color: var(--color-secundario);
+}
+
+/* Estilos de estados de las notas */
+em.aprobado { color: #27ae60; font-weight: bold; font-style: normal; }
+em.reprobado { color: #c0392b; font-weight: bold; font-style: normal; }
+
+/* === LISTAS === */
+ul {
+    padding-left: 20px;
+}
+ul li {
+    margin-bottom: 8px;
+}
+
+/* === FORMULARIO === */
+form {
+    display: flex;
+    flex-direction: column; /* Apila los inputs uno debajo del otro */
+    gap: 12px;
+    max-width: 500px;
+}
+
+form label {
+    font-weight: bold;
+    color: var(--color-primario);
+}
+
+input, textarea {
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: var(--radio-borde);
+    font-size: 16px;
+    font-family: inherit;
+    width: 100%;
+}
+
+/* Efecto focus cuando el usuario escribe */
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--color-acento);
+    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.2);
+}
+
+button[type="submit"] {
+    background-color: var(--color-acento);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--radio-borde);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    align-self: flex-start; /* El botón ocupa solo su espacio necesario, no el 100% */
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--color-primario);
+}
+
+/* === FOOTER === */
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: var(--color-primario);
+    color: white;
+    margin-top: 50px;
+}
+
+/* === MEDIA QUERY PARA DISEÑO RESPONSIVO (Móviles) === */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Apila el título arriba y el nav abajo */
+        gap: 15px;
+        text-align: center;
+    }
+
+    nav {
+        flex-direction: row; /* Mantiene enlaces horizontales pero con espacio ajustable */
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .perfil-contenido {
+        flex-direction: column; /* La foto se posiciona arriba del texto en celulares */
+        text-align: center;
+    }
+    
+    main {
+        margin: 15px auto;
+    }
+}
