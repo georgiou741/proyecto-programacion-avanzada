@@ -8,7 +8,7 @@
     <h2>Bienvenid@s, internautas!</h2>
 
     <p>
-        Este es mi portafolio academico
+        Este es mi portafolio academico — SIS-500.
     </p>
 
     <div class="datos-inicio">
@@ -28,8 +28,8 @@
         </div>
 
         <div class="dato">
-            <strong>Anio:</strong>
-            <span>{{ $anio }}</span>
+            <strong>Año:</strong>
+            <span>{{ $año }}</span>
         </div>
     </div>
 </section>

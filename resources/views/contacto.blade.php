@@ -21,13 +21,22 @@
         @csrf
 
         <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" value="{{ old('nombre') }}" required>
+        @error('nombre')
+            <span style="color: red; font-size: 0.8rem;">{{ $message }}</span>
+        @enderror
 
         <label for="correo">Correo</label>
-        <input type="email" id="correo" name="correo" placeholder="Tu correo" required>
+        <input type="email" id="correo" name="correo" placeholder="Tu correo" value="{{ old('correo') }}" required>
+        @error('correo')
+            <span style="color: red; font-size: 0.8rem;">{{ $message }}</span>
+        @enderror
 
         <label for="mensaje">Mensaje</label>
-        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Tu mensaje aquí..." required></textarea>
+        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Tu mensaje aquí..." required>{{ old('mensaje') }}</textarea>
+        @error('mensaje')
+            <span style="color: red; font-size: 0.8rem;">{{ $message }}</span>
+        @enderror
 
         <button type="submit">Enviar</button>
     </form>

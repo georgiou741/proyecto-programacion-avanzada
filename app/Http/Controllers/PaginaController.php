@@ -13,7 +13,7 @@ class PaginaController extends Controller
             'nombre' => 'Jorge Mauricio Suarez Romero',
             'carrera' => 'Ingeniería de Sistemas',
             'semestre' => 'Quinto semestre',
-            'anio' => date('Y'),
+            'año' => date('Y'),
         ]);
     }
 
@@ -23,9 +23,9 @@ class PaginaController extends Controller
         $habilidades = [
             'Tocar el bajo eléctrico',
             'Mantenimiento de servidores',
-            'Cuidador de personas con discapacidad severa',
+            'Asistente de personas con discapacidad severa',
             'Traductor inglés - español',
-            'Actor mimo',
+            'Lenguaje de programación C++',
         ];
 
         return view('sobre-mi', [
@@ -39,22 +39,14 @@ class PaginaController extends Controller
 
     public function materias()
     {
-        // Las 5 materias exactas de tu archivo HTML
-        $materias = [
-            new Materia('Física aplicada', 'FIS-100', 5, 51.0),
-            new Materia('Desarrollo sostenible', 'DES-200', 5, 87.0),
-            new Materia('Ciencia de datos y big data', 'BIG-300', 5, 69.0),
-            new Materia('Base de datos II', 'SIS-480', 5, 47.0),
-            new Materia('Práctica profesional III', 'PRA-500', 5, null), // Materia pendiente (null)
-        ];
-
-        // Filtramos las materias que tienen nota para calcular el promedio real
-        $materiasConNota = array_filter($materias, fn(Materia $m) => !is_null($m->getNota()));
-        $notas = array_map(fn(Materia $m) => $m->getNota(), $materiasConNota);
-        
-        $promedio  = count($notas) > 0 ? round(array_sum($notas) / count($notas), 2) : 0;
-        $aprobadas = count(array_filter($materias, fn(Materia $m) => $m->estaAprobada()));
-
+ // ANTES (Parte 2): instanciaba objetos manualmente con new Materia(...)
+ // AHORA (Parte 3): Eloquent recupera todos los registros de la tabla 'materias'
+ // La interfaz pública de Materia es IDÉNTICA — la vista no necesita cambios.
+        $materias = Materia::all();
+ // avg() devuelve null si la colección está vacía → ?? 0 evita el error.
+        $promedio = round($materias->avg(fn(Materia $m) => $m->getNota()) ?? 0, 2);
+        $aprobadas = $materias->filter(fn(Materia $m) => $m->estaAprobada())->count();
+ 
         return view('materias', compact('materias', 'promedio', 'aprobadas'));
     }
 
@@ -66,9 +58,9 @@ class PaginaController extends Controller
     public function procesarContacto(Request $request)
     {
         $validated = $request->validate([
-            'nombre'  => 'required|min:3',
-            'correo'   => 'required|email', // Vinculado al name="correo" de tu formulario HTML
-            'mensaje' => 'required',
+            'nombre'  => 'required|min:3|max:100',
+            'correo'   => 'required|email', // Vinculado al name="correo" del formulario HTML
+            'mensaje' => 'required|min:10',
         ]);
 
         return view('contacto', [
