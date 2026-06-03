@@ -6,6 +6,15 @@ use App\Http\Controllers\PaginaController;
 
 use App\Http\Controllers\ProductoController;
 
+Route::get('/', function () {
+ return view('welcome', [
+ 'nombre' => 'Tu Nombre Completo',
+ 'carrera' => 'Ingeniería de Sistemas',
+ 'semestre' => 'Sexto semestre',
+ 'año' => date('Y'),
+ ]);
+});
+
 // 1. Ruta de Inicio
 Route::get('/', [PaginaController::class, 'inicio'])->name('inicio');
 
