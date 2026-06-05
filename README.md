@@ -28,6 +28,6 @@ en la Universidad Privada San Francisco de Asís.
 9. Abrir en el navegador: http://127.0.0.1:8000
 
 ## Autor
-**[Tu Nombre Completo]**  
+**[Jorge Suarez Romero]**  
 Estudiante de Ingeniería de Sistemas — USFA  
-GitHub: [@tu-usuario](https://github.com/tu-usuario)
+GitHub: [@georgiou741](https://github.com/georgiou741)
